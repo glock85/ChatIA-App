@@ -1,0 +1,22 @@
+import {useDispatch} from "../redux/store";
+import {addMessage} from "../redux/slices/chatHistorySlice";
+import {useState} from "react";
+
+
+export function useSubmitMessage() {
+
+    const dispatch = useDispatch();
+
+    const sendMessage =  (message: string) => {
+
+        if (message !== "") {
+            dispatch(addMessage({role: "user", content: message}));
+        }
+
+    };
+
+    return {
+        sendMessage,
+    }
+
+}
