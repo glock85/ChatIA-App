@@ -26,21 +26,15 @@ export const chatHistorySlice = createSlice({
       action: PayloadAction<ChatMessage>
     ) => {
       if (state.currentHistory) {
-        console.log("estoy en el IF");
-        console.log(state.currentHistory);
-        console.log(action.payload);
         state.currentHistory.messages = [
           ...state.currentHistory.messages,
           action.payload,
         ];
       } else {
-        console.log("estoy en el ELSE");
         const newHistory = new ChatHistory([action.payload]);
         state.currentHistory = newHistory;
         state.chatHistories[newHistory.id] = newHistory;
       }
-
-      console.log("estoy FUERA");
 
       state.messages.push(action.payload);
     },

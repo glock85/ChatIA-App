@@ -32,8 +32,6 @@ export function useFetchAllMessage() {
                 content: systemPrompt,
             })
 
-            console.log({messages})
-
             const {data} = await openaiClient.createChatCompletion({
                 model: "gpt-4",
                 messages,
@@ -41,14 +39,11 @@ export function useFetchAllMessage() {
                 max_tokens: 1000,
             });
 
-            console.log(data);
-
             const {choices} = data;
             const newMessage = choices[0]?.message?.content?.trim() || "";
 
             if (newMessage) {
                 dispatch(addMessage({role: "assistant", content: newMessage}));
-                // setMessagesIA((prevMessages) => [...prevMessages, newMessage]);
             }
             setLoading(false);
         } catch (error) {

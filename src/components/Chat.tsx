@@ -113,8 +113,6 @@ const Chat: React.FC<ChatProps> = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/*Mover a componente aparte para evitar re render en cada teclado*/}
-
       <div
         style={{
           display: "grid",
@@ -132,7 +130,7 @@ const Chat: React.FC<ChatProps> = () => {
           onSubmit={handleMessageSubmit}
           style={{
             display: "flex",
-            justifyContent: 'space-between',
+            justifyContent: "space-between",
             width: "100%",
           }}
         >

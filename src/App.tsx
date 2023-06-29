@@ -14,7 +14,6 @@ const App: React.FC = () => {
 
   const onToggle = () => {
     setToggle(!toggle);
-    console.log(toggle);
   };
 
   return (
