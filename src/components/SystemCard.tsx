@@ -4,6 +4,8 @@ import { dispatch } from "../redux/store";
 import { modifyHistory } from "../redux/slices/chatHistorySlice";
 import { useEffect } from "react";
 
+import "../styles/system-card.css";
+
 const SystemCard = () => {
   const { onChange, value } = useField<string>("");
 
@@ -12,17 +14,7 @@ const SystemCard = () => {
   }, [value]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "20px",
-        background: "white",
-        borderRadius: "5px",
-        border: "1px solid #e5e7eb",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
-      }}
-    >
+    <div className="system-card-container">
       <h3 style={{ margin: 0 }}>Sistema</h3>
       <p>
         Para conseguir una respuesta adecuada a tus necesidades, escribe un
@@ -32,16 +24,7 @@ const SystemCard = () => {
       <Input
         type="text"
         placeholder="Escribe un prompt para el sistema"
-        postFix={
-          <BsSend
-            style={{
-              position: "absolute",
-              right: "20px",
-              fontSize: "20px",
-              color: "rgb(249, 115, 22)",
-            }}
-          />
-        }
+        postFix={<BsSend className="system-card-container__send-icon" />}
         value={value}
         onChange={onChange}
       />

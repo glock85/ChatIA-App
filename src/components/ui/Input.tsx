@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { InputHTMLAttributes } from "react";
+import "../../styles/chat.css";
 
 export function useField<T>(initValue: T) {
   const [value, setValue] = useState(initValue);
@@ -28,26 +29,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   clear?: () => void;
 }
 
-const inputStyle = {
-  width: "100%",
-  height: "30px",
-  borderRadius: "5px",
-  border: "1px solid black",
-  padding: "5px",
-  margin: "5px",
-};
 export const Input: React.FC<InputProps> = (props) => {
   return (
-    <div
-      style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-      }}
-    >
+    <div className="container-input-chat">
       <span>{props.label}</span>
-      <input style={{ ...inputStyle, ...props.styles }} {...props} />
+      <input className="input-chat" style={{ ...props.styles }} {...props} />
       {props.postFix}
     </div>
   );

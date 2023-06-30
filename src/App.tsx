@@ -3,6 +3,7 @@ import Chat from "./components/Chat";
 import Header from "./components/Header";
 import HistoryList from "./components/HistoryList";
 import SystemCard from "./components/SystemCard";
+import "./styles/app.css";
 
 const App: React.FC = () => {
   const apiKey = process.env.REACT_APP_OPENAI_API_KEY || "";
@@ -19,24 +20,9 @@ const App: React.FC = () => {
   return (
     <>
       <Header callback={onToggle} isToggle={toggle} />
-
-      <div
-        style={{
-          display: "flex",
-          backgroundColor: "rgba(248,250,252,255)",
-          margin: "30px",
-          gap: "30px",
-        }}
-      >
+      <div className="container-app">
         {toggle && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              width: "35%",
-            }}
-          >
+          <div className="sidebar">
             <SystemCard />
             <HistoryList />
           </div>

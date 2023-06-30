@@ -1,0 +1,13 @@
+.container-app {
+  display: flex;
+  background-color: rgba(248, 250, 252, 255);
+  margin: 30px;
+  gap: 30px;
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35%;
+  }
+}

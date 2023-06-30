@@ -8,6 +8,7 @@ import CardMessageIALoading from "./CardMessageIALoading";
 import { Input, useField } from "./ui";
 import { useFetchAllMessage, useSubmitMessage } from "../use_cases";
 import { RootState, useSelector } from "../redux/store";
+import "../styles/chat.css";
 
 interface ChatInputButtonsProps {
   onSendClick: () => void;
@@ -15,16 +16,7 @@ interface ChatInputButtonsProps {
 
 const ChatInputButtons: React.FC<ChatInputButtonsProps> = ({ onSendClick }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        position: "absolute",
-        right: "50px",
-        fontSize: "20px",
-        gap: "15px",
-        cursor: "pointer",
-      }}
-    >
+    <div className="chat-input-buttons">
       <BsSend onClick={() => onSendClick()} color="rgb(249, 115, 22)" />
       <VscWand color="green" />
     </div>
@@ -44,11 +36,11 @@ const Chat: React.FC<ChatProps> = () => {
   const systemPrompt = useSelector(
     (state: RootState) => state.chatHistorySlice.systemPrompt
   );
-  const message = useField<string>("");
   const { fetchMessages, loading, chatHistory } = useFetchAllMessage();
   const { sendMessage } = useSubmitMessage();
   const [remainingTokens, setRemainingTokens] = useState(1001);
 
+  const message = useField<string>("");
   const messagesEndRef = useRef(null as any);
 
   const countTokens = (text: string): number => {
@@ -59,10 +51,6 @@ const Chat: React.FC<ChatProps> = () => {
     // Retorna el número total de tokens
     return wordCount;
   };
-
-  useEffect(() => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [fetchMessages]);
 
   const submitNewMessage = () => {
     sendMessage(message.value);
@@ -76,6 +64,9 @@ const Chat: React.FC<ChatProps> = () => {
     e.preventDefault();
     submitNewMessage();
   };
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [fetchMessages]);
 
   useEffect(() => {
     const tokenCount = countTokens(message.value);
@@ -85,27 +76,12 @@ const Chat: React.FC<ChatProps> = () => {
       return;
     }
   }, [message.value]);
+
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "1px solid #e5e7eb",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
-        position: "relative",
-      }}
-    >
+    <div className="chat-container">
       <HeaderChat />
 
-      <div
-        style={{
-          height: "70vh",
-          overflowY: "scroll",
-          padding: "10px",
-          boxSizing: "border-box",
-          paddingBottom: "100px",
-        }}
-      >
+      <div className="card-container">
         {chatHistory.map((message, index) => (
           <CardMessageUser key={index} message={message} />
         ))}
@@ -113,27 +89,8 @@ const Chat: React.FC<ChatProps> = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          placeItems: "center",
-          position: "absolute",
-          bottom: "0",
-          width: "100%",
-          height: "100px",
-          borderTop: "1px solid #e5e7eb",
-          boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
-          background: "white",
-        }}
-      >
-        <form
-          onSubmit={handleMessageSubmit}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
+      <div className="form-container">
+        <form onSubmit={handleMessageSubmit} className="form-chat">
           <Input
             placeholder="Escribe tu mensaje..."
             {...message}

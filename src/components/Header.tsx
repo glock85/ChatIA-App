@@ -1,54 +1,27 @@
 import { BsChevronLeft } from "react-icons/bs";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
+import "../styles/header.css";
 
-const Header = ({ callback, isToggle }: { callback: any, isToggle: boolean }) => {
+const Header = ({
+  callback,
+  isToggle,
+}: {
+  callback: any;
+  isToggle: boolean;
+}) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "10px",
-        background: "#F97316",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          gap: "15px",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            gap: "15px",
-            cursor: "pointer",
-            alignItems: "center",
-            color: "white",
-            border: "1px solid white",
-            paddingLeft: "15px",
-            paddingRight: "25px",
-            borderRadius: "5px",
-            height: "30px",
-          }}
-        >
+    <div className="header-container">
+      <div className="header-container__left">
+        <div className="header-container__left__back">
           <BsChevronLeft style={{ fontSize: "16px", color: "white" }} />
           <p>Atrás</p>
         </div>
         <div
+          className="header-container__left__collapse"
           style={{
-            display: "flex",
-            cursor: "pointer",
-            alignItems: "center",
-            color: isToggle ? "#F97316" : "white",
-            border: "1px solid white",
-            paddingLeft: "15px",
-            paddingRight: "15px",
-            borderRadius: "5px",
-            height: "30px",
             background: !isToggle ? "#F97316" : "white",
+            color: isToggle ? "#F97316" : "white",
           }}
           onClick={callback}
         >
@@ -56,17 +29,8 @@ const Header = ({ callback, isToggle }: { callback: any, isToggle: boolean }) =>
         </div>
       </div>
       <div
-        style={{
-          display: "flex",
-          cursor: "pointer",
-          alignItems: "center",
-          color: "white",
-          border: "1px solid white",
-          paddingLeft: "15px",
-          paddingRight: "15px",
-          borderRadius: "5px",
-          height: "30px",
-        }}
+        className="header-container__left__collapse"
+        style={{ color: "white" }}
       >
         <IoSettingsOutline />
       </div>

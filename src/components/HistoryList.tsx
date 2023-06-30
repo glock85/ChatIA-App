@@ -9,6 +9,7 @@ import { useDispatch } from "../redux/store";
 import { deleteChat, selectChat } from "../redux/slices/chatHistorySlice";
 import { dispatch } from "../redux/store";
 import { resetMessages } from "../redux/slices/chatHistorySlice";
+import "../styles/history-list.css";
 
 const HistoryCard: React.FC<{ history: ChatHistory }> = ({ history }) => {
   const dispatch = useDispatch();
@@ -29,49 +30,18 @@ const HistoryCard: React.FC<{ history: ChatHistory }> = ({ history }) => {
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        background: "#FDBA74",
-        margin: "10px",
-        padding: "10px",
-        borderRadius: "5px",
-        alignItems: "center",
-      }}
+      className="history-card-container"
       onClick={() => {
         dispatch(selectChat(history.id));
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          gap: "15px",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <BsSearch
-          style={{
-            fontSize: "20px",
-            color: "white",
-            background: "rgb(249, 115, 22)",
-            borderRadius: "90px",
-            padding: "10px",
-          }}
-        />
+      <div className="history-card-container__search">
+        <BsSearch className="history-card-container__search-icon" />
         <div>
           <h3 style={{ padding: 0, margin: 0 }}>{title}</h3>
-          <div
-            style={{
-              display: "flex",
-              color: "grey",
-              gap: "4px",
-              alignItems: "center",
-            }}
-          >
+          <div className="history-card-container__search-icon__timestamp">
             <PiClockCountdownThin />
-            <p style={{ padding: 0, margin: 0, color: "grey", fontSize: 14 }}>
+            <p className="history-card-container__search-icon__timestamp__text">
               {timestamp}
             </p>
           </div>
@@ -110,27 +80,9 @@ const HistoryList: React.FC = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        background: "white",
-        borderRadius: "5px",
-        height: "100%",
-        border: "1px solid #e5e7eb",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
-      }}
-    >
+    <div className="history-list-container">
       <h3 style={{ margin: 0, padding: 20 }}>Historial de Búsquedas</h3>
-      <h4
-        style={{
-          color: "red",
-          margin: 0,
-          padding: "0 20px 20px 20px",
-          cursor: "pointer",
-        }}
-        onClick={deleteChat}
-      >
+      <h4 className="history-list-container__delete-all" onClick={deleteChat}>
         Eliminar todo
       </h4>
       <div style={{ border: "0.1px solid #e5e7eb" }} />
